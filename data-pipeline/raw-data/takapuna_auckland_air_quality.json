@@ -1,0 +1,17 @@
+{
+    "uid": 9304,
+    "aqi": "30",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 17:00:00",
+        "vtime": 1723611600
+    },
+    "station": {
+        "name": "Takapuna, Auckland",
+        "geo": [
+            -36.78,
+            174.74
+        ],
+        "url": "new-zealand/auckland/takapuna"
+    }
+}

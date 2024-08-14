@@ -1,0 +1,17 @@
+{
+    "uid": 11970,
+    "aqi": "26",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 14:00:00",
+        "vtime": 1723600800
+    },
+    "station": {
+        "name": "Tahunanui Nelson At Blackwood St, New Zealand",
+        "geo": [
+            -41.29511685,
+            173.2423759
+        ],
+        "url": "new-zealand/nelson/tahunanui/nelson-at-blackwood-st"
+    }
+}

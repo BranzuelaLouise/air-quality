@@ -1,0 +1,17 @@
+{
+    "uid": 9301,
+    "aqi": "20",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 17:00:00",
+        "vtime": 1723611600
+    },
+    "station": {
+        "name": "Glen Eden, Auckland",
+        "geo": [
+            -36.92,
+            174.65
+        ],
+        "url": "new-zealand/auckland/glen-eden"
+    }
+}

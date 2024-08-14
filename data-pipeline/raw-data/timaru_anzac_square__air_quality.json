@@ -1,0 +1,17 @@
+{
+    "uid": 9101,
+    "aqi": "40",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 16:00:00",
+        "vtime": 1723608000
+    },
+    "station": {
+        "name": "Timaru Anzac Square, New Zealand",
+        "geo": [
+            -44.4041809,
+            171.2487857
+        ],
+        "url": "new-zealand/canterbury/timaru-anzac-square"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "uid": 11980,
+    "aqi": "28",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 15:00:00",
+        "vtime": 1723604400
+    },
+    "station": {
+        "name": "Invercargill Invercargill At Pomona Street, New Zealand",
+        "geo": [
+            -46.431928390214,
+            168.36991681188
+        ],
+        "url": "new-zealand/southland/invercargill/invercargill-at-pomona-street"
+    }
+}

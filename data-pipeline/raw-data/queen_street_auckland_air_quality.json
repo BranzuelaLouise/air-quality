@@ -1,0 +1,17 @@
+{
+    "uid": 12748,
+    "aqi": "-",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2023-08-23 06:00:00",
+        "vtime": 1692727200
+    },
+    "station": {
+        "name": "Queen Street, Auckland",
+        "geo": [
+            -36.84742808,
+            174.7657304
+        ],
+        "url": "new-zealand/auckland/queen-street"
+    }
+}

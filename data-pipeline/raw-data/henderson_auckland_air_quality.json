@@ -1,0 +1,17 @@
+{
+    "uid": 9300,
+    "aqi": "27",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 17:00:00",
+        "vtime": 1723611600
+    },
+    "station": {
+        "name": "Henderson, Auckland",
+        "geo": [
+            -36.86,
+            174.62
+        ],
+        "url": "new-zealand/auckland/henderson"
+    }
+}

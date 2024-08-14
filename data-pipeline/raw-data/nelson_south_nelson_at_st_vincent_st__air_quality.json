@@ -1,0 +1,17 @@
+{
+    "uid": 11971,
+    "aqi": "-",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-06-04 17:00:00",
+        "vtime": 1717477200
+    },
+    "station": {
+        "name": "Nelson South Nelson At St Vincent St, New Zealand",
+        "geo": [
+            -41.27822953,
+            173.27352648
+        ],
+        "url": "new-zealand/nelson/nelson-south/nelson-at-st-vincent-st"
+    }
+}

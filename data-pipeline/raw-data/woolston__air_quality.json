@@ -1,0 +1,17 @@
+{
+    "uid": 9096,
+    "aqi": "18",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 15:00:00",
+        "vtime": 1723604400
+    },
+    "station": {
+        "name": "Woolston, New Zealand",
+        "geo": [
+            -43.5473746,
+            172.6790455
+        ],
+        "url": "new-zealand/canterbury/woolston"
+    }
+}

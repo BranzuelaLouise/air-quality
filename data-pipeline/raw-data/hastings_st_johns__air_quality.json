@@ -1,0 +1,17 @@
+{
+    "uid": 11967,
+    "aqi": "13",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 15:00:00",
+        "vtime": 1723604400
+    },
+    "station": {
+        "name": "Hastings St Johns, New Zealand",
+        "geo": [
+            -39.638873262,
+            176.85880199271
+        ],
+        "url": "new-zealand/hawkes-bay/hastings/st-johns"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "uid": 14879,
+    "aqi": "20",
+    "time": {
+        "tz": "+12:00",
+        "stime": "2024-08-14 14:00:00",
+        "vtime": 1723600800
+    },
+    "station": {
+        "name": "Whang\u0101rei  Whang\u0101rei Air Shed At Robert Street, New Zealand",
+        "geo": [
+            -35.72673221,
+            174.32424643
+        ],
+        "url": "new-zealand/northland/whangarei/whangarei-air-shed-at-robert-street"
+    }
+}
