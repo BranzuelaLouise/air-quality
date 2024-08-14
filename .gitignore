@@ -1,3 +1,11 @@
 .env
 venv/
+.idea/
 data_pipeline/raw-data/
+data_pipeline/__pycache__
+data_pipeline/config/__pycache__
+data_pipeline/extract/__pycache__
+data_pipeline/load/__pycache__
+data_pipeline/scheduler/__pycache__
+data_pipeline/transform/__pycache__
+data_pipeline/load/air_quality.db
