@@ -1,9 +1,11 @@
-import os
 import requests
 import json
+import sys
+import os
 from dotenv import load_dotenv
 from unidecode import unidecode
-from ..config.settings import COUNTRY   # Import settings for the COUNTRY constant
+from data_pipeline.config.settings import COUNTRY   # Import settings for the COUNTRY constant
+
 
 # Specify where the .env file is in the directory and load it
 env_path = "../config/.env"
