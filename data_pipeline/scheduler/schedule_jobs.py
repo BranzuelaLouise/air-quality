@@ -10,7 +10,7 @@ def job():
     for city in cities:
         air_data = fetch_stations(city)
         if air_data:
-            save_data(air_data, air_data['city']['name'])
+            save_data(air_data, city)
 
     raw_data_dir = os.path.join("../", "raw-data")
     for filename in os.listdir(raw_data_dir):
