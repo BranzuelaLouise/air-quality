@@ -3,9 +3,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from data_pipeline.config.settings import COUNTRY
 
 # Data Validation
-with sqlite3.connect('../../database/air_quality.db') as conn:
+with sqlite3.connect(f'../../database/{COUNTRY}.db') as conn:
     df = pd.read_sql("SELECT * FROM air_quality", conn)
 
 df['time'] = df['time'].str.split(' ').str[0]
@@ -13,7 +14,6 @@ df['time'] = pd.to_datetime(df['time'])
 df = df.groupby(['time', 'station'])['aqi'].mean().reset_index()
 df['aqi'] = np.floor(df['aqi']).astype(int)
 
-# Group data by city
 df['year'] = df['time'].dt.year
 
 # Group data by year
