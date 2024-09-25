@@ -1,14 +1,7 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import { AppBar, Toolbar, Typography, CssBaseline, Container,
+Box, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import AirQualityChart from './aqchart.js';
 
 function App() {
   return (
@@ -40,9 +33,6 @@ function App() {
               <ListItemText primary="Dashboard" />
             </ListItem>
             <ListItem button>
-              <ListItemText primary="Reports" />
-            </ListItem>
-            <ListItem button>
               <ListItemText primary="Settings" />
             </ListItem>
           </List>
@@ -59,7 +49,9 @@ function App() {
           <Typography variant="h4" gutterBottom>
             Welcome to the Air Quality Dashboard
           </Typography>
-          {/* Add your content here */}
+              <div className="App">
+                <AirQualityChart />
+              </div>
         </Container>
       </Box>
     </Box>
