@@ -2,11 +2,10 @@ import os
 import json
 import sqlite3
 from data_pipeline.transform.transform_historical import process_historical
-from data_pipeline.config.settings import COUNTRY
 
 
 def create_table():
-    conn = sqlite3.connect(f'../../database/{COUNTRY}.db')
+    conn = sqlite3.connect(f'../../database/air_quality.db')
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS air_quality (
@@ -20,7 +19,7 @@ def create_table():
 
 
 def insert_data(station, aqi, time):
-    conn = sqlite3.connect(f'../../database/{COUNTRY}.db')
+    conn = sqlite3.connect(f'../../database/air_quality.db')
     cursor = conn.cursor()
     cursor.execute('''
         INSERT INTO air_quality (station, aqi, time)
@@ -45,7 +44,7 @@ def load_data(path, name):
             return None
 
         # Make sure record is more up-to-date than the latest record in the database
-        with sqlite3.connect(f'../../database/{COUNTRY}.db') as conn:
+        with sqlite3.connect(f'../../database/air_quality.db') as conn:
             cursor = conn.cursor()
             latest_time = cursor.execute('SELECT MAX(time) FROM air_quality').fetchone()[0]
 

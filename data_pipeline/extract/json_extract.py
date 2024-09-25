@@ -1,10 +1,9 @@
 import sqlite3
 import pandas as pd
 import numpy as np
-from data_pipeline.config.settings import COUNTRY
 
 # Data Validation
-with sqlite3.connect(f'../../database/{COUNTRY}.db') as conn:
+with sqlite3.connect(f'../../database/air_quality.db') as conn:
     df = pd.read_sql("SELECT * FROM air_quality", conn)
 
 df['time'] = df['time'].str.split(' ').str[0]
