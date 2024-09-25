@@ -32,9 +32,6 @@ function App() {
             <ListItem button>
               <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem button>
-              <ListItemText primary="Settings" />
-            </ListItem>
           </List>
         </Box>
       </Drawer>

@@ -1,8 +1,10 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 import pandas as pd
 import sqlite3
 
 app = Flask(__name__)
+CORS(app)
 
 
 # API route for air quality data
