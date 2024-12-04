@@ -17,6 +17,7 @@ def air_quality():
     air_quality_df['time'] = pd.to_datetime(air_quality_df['time'])
     air_quality_df = air_quality_df.groupby(['time', 'station'])['aqi'].mean().reset_index()
     air_quality_df['aqi'] = air_quality_df['aqi'].apply(lambda x: int(x))
+    air_quality_df = air_quality_df.sort_values(by='time')
 
     # Convert the DataFrame to JSON
     air_quality_json = air_quality_df.to_dict(orient='records')

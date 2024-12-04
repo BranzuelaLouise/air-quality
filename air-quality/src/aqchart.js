@@ -1,74 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Card, CardContent, Typography, Grid, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
-import moment from 'moment';
+import { Card, CardContent, Typography, Grid, MenuItem, Select, FormControl, InputLabel, CircularProgress, Alert } from '@mui/material';
+import { useAirQualityData } from './hooks/useAirQualityData';
+
+const cityColors = {
+  Auckland: '#8884d8',
+  Christchurch: '#82ca9d',
+  Dunedin: '#ff7300',
+  Wellington: '#ffc658',
+  Hamilton: '#d0ed57',
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div style={{ backgroundColor: 'white', padding: '10px', border: '1px solid #ccc' }}>
+        <p>{`Date: ${label}`}</p>
+        {payload.map((entry) => (
+          <p key={entry.name} style={{ color: entry.color }}>
+            {`${entry.name}: ${entry.value.toFixed(1)}`}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};
 
 const AirQualityChart = () => {
-  const [data, setData] = useState([]);
-  const [selectedYear, setSelectedYear] = useState('2020'); // Default year
-  const [years, setYears] = useState([]);  // List of available years
+  const { data, loading, error, years } = useAirQualityData();
+  const [selectedYear, setSelectedYear] = useState(() => {
+    const currentYear = new Date().getFullYear().toString();
+    return years.includes(currentYear) ? currentYear : '2020';
+  });
 
-  // Fetch data from API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://192.168.1.12:5000/api/air-quality');
-        const result = await response.json();
-        const formattedData = formatData(result);
-        setData(formattedData);
-        setYears(getUniqueYears(formattedData));  // Get the list of unique years
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  const chartData = useMemo(() => {
+    if (!data.length) return [];
+    
+    // Filter data for selected year and create a map of dates
+    const dateMap = new Map();
+    
+    data.filter(item => item.year === selectedYear)
+        .forEach(item => {
+          if (!dateMap.has(item.date)) {
+            dateMap.set(item.date, { date: item.date });
+          }
+          dateMap.get(item.date)[item.city] = item.aqi;
+        });
+    
+    return Array.from(dateMap.values())
+                .sort((a, b) => a.date.localeCompare(b.date));
+  }, [data, selectedYear]);
 
-    fetchData();
-  }, []);
+  if (loading) {
+    return (
+      <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '400px' }}>
+        <CircularProgress />
+      </Grid>
+    );
+  }
 
-  // Helper function to format the API data
-  const formatData = (data) => {
-    return data.map(item => ({
-      date: moment(item.time).format('YYYY-MM-DD'),  // Convert timestamp to date
-      year: moment(item.time).format('YYYY'),  // Extract the year
-      city: item.station,
-      aqi: item.aqi,
-    }));
-  };
-
-  // Get unique years from the data
-  const getUniqueYears = (data) => {
-    const allYears = data.map(item => item.year);
-    return [...new Set(allYears)]; // Return unique years
-  };
-
-  // Organize data by city and filter by year
-  const organizeByCityAndYear = (data, year) => {
-    const filteredData = data.filter(item => item.year === year);
-    const cities = {};
-    filteredData.forEach(item => {
-      const { date, city, aqi } = item;
-      if (!cities[city]) {
-        cities[city] = [];
-      }
-      cities[city].push({ date, aqi });
-    });
-    return cities;
-  };
-
-  // Handle year selection change
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
-  };
-
-  const cityData = organizeByCityAndYear(data, selectedYear);
-
-  const cityColors = {
-    Auckland: '#8884d8',
-    Christchurch: '#82ca9d',
-    Dunedin: '#ff7300',
-    Wellington: '#ffc658',
-    Hamilton: '#d0ed57',
-  };
+  if (error) {
+    return (
+      <Alert severity="error">
+        Error loading air quality data: {error}
+      </Alert>
+    );
+  }
 
   return (
     <Grid container spacing={2} justifyContent="center">
@@ -79,15 +77,14 @@ const AirQualityChart = () => {
               Air Quality Over Time
             </Typography>
 
-            {/* Dropdown for selecting year */}
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{ mb: 3 }}>
               <InputLabel id="year-select-label">Year</InputLabel>
               <Select
                 labelId="year-select-label"
                 id="year-select"
                 value={selectedYear}
                 label="Year"
-                onChange={handleYearChange}
+                onChange={(e) => setSelectedYear(e.target.value)}
               >
                 {years.map((year) => (
                   <MenuItem key={year} value={year}>
@@ -98,20 +95,33 @@ const AirQualityChart = () => {
             </FormControl>
 
             <ResponsiveContainer width="100%" height={400}>
-              <LineChart>
+              <LineChart
+                data={chartData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" allowDuplicatedCategory={false}/>
-                <YAxis domain={[0, 50]}/>
-                <Tooltip />
+                <XAxis 
+                  dataKey="date" 
+                  tick={{ fontSize: 12 }}
+                  interval="preserveStartEnd"
+                />
+                <YAxis 
+                  domain={[0, 50]}
+                  tick={{ fontSize: 12 }}
+                  label={{ value: 'Air Quality Index', angle: -90, position: 'insideLeft' }}
+                />
+                <Tooltip content={<CustomTooltip />} />
                 <Legend />
-                {Object.keys(cityData).map(city => (
+                {Object.keys(cityColors).map(city => (
                   <Line
                     key={city}
                     type="monotone"
-                    dataKey="aqi"
-                    data={cityData[city]}
+                    dataKey={city}
                     name={city}
                     stroke={cityColors[city]}
+                    dot={false}
+                    strokeWidth={2}
+                    connectNulls
                   />
                 ))}
               </LineChart>
@@ -122,7 +132,5 @@ const AirQualityChart = () => {
     </Grid>
   );
 };
-
-
 
 export default AirQualityChart;
