@@ -1,40 +1,18 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, CssBaseline, Container,
-Box, Drawer, List, ListItem, ListItemText } from '@mui/material';
-import AirQualityChart from './aqchart.js';
+import { Toolbar, Typography, CssBaseline, Container, Box} from '@mui/material';
+import AirQualityChart from './components/aqchart.js';
+import Header from './components/Header.js';
+import NavBar from './components/NavBar.js';
 
 function App() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
-      {/* AppBar */}
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Air Quality Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header />
 
       {/* Drawer */}
-      <Drawer
-        variant="permanent"
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' },
-        }}
-      >
-        <Toolbar />
-        <Box sx={{ overflow: 'auto' }}>
-          <List>
-            <ListItem button>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-          </List>
-        </Box>
-      </Drawer>
+      <NavBar />
 
       {/* Main Content */}
       <Box
