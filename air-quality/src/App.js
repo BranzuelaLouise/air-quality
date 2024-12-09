@@ -11,7 +11,6 @@ function App() {
 
       <Header />
 
-      {/* Drawer */}
       <NavBar />
 
       {/* Main Content */}

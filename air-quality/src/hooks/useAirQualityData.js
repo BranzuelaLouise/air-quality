@@ -13,7 +13,7 @@ export const useAirQualityData = () => {
         setLoading(true);
         const response = await fetch('http://127.0.0.1:5000/api/air-quality');
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error(`Failed to fetch data: ${response.status}`);
         }
         const result = await response.json();
         
@@ -41,6 +41,7 @@ export const useAirQualityData = () => {
         setYears(processedData.years.sort());
         setError(null);
       } catch (err) {
+        console.error('Fetch error:', err);
         setError(err.message);
       } finally {
         setLoading(false);

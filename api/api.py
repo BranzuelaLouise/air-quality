@@ -4,13 +4,14 @@ import pandas as pd
 import sqlite3
 
 app = Flask(__name__)
+# Allow all origins in development
 CORS(app)
 
 
 # API route for air quality data
 @app.route('/api/air-quality')
 def air_quality():
-    with sqlite3.connect(f'../database/air_quality.db') as conn:
+    with sqlite3.connect(f'database/air_quality.db') as conn:
         air_quality_df = pd.read_sql("SELECT * FROM air_quality", conn)
 
     air_quality_df['time'] = air_quality_df['time'].str.split(' ').str[0]
@@ -27,4 +28,4 @@ def air_quality():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
